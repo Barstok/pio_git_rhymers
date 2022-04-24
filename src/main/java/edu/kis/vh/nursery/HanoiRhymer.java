@@ -2,7 +2,7 @@ package edu.kis.vh.nursery;
 
 // Złe były wiersze zawierające pole totalRejected oraz instrukcje warunkowe w metodzie countIn
 
-public class HanoiRhymer extends defaultCountingOutRhymer {
+public class HanoiRhymer extends DefaultCountingOutRhymer {
 
     int totalRejected = 0;
 
