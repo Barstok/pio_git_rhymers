@@ -1,10 +1,15 @@
 package edu.kis.vh.nursery.list;
 
+
 public class IntLinkedList {
 
 	private Node last;
 	private int i;
 
+	/**
+	 * dodaj element na koniec listy
+	 * @param i - element do dodania
+	 */
 	public void push(int i) {
 		if (getLast() == null)
 			setLast(new Node(i));
@@ -15,20 +20,36 @@ public class IntLinkedList {
 		}
 	}
 
+	/**
+	 * metoda sprawdza czy lista jest pusta
+	 * @return true - lista jest pusta
+	 */
 	public boolean isEmpty() {
 		return getLast() == null;
 	}
 
+	/**
+	 * sprawdza czy lista jest pusta
+	 * @return false
+	 */
 	public boolean isFull() {
 		return false;
 	}
 
+	/**
+	 * metoda zwraca wartość ostatniego elementu z listy
+	 * @return wartość ostatniego elementu lub -1 jeśli lista jest pusta
+	 */
 	public int top() {
 		if (isEmpty())
 			return -1;
 		return getLast().getValue();
 	}
 
+	/**
+	 * metoda zwraca wartość i usuwa ostatni element z listy
+	 * @return wartość ostatniego elementu lub -1 jeśli lista jest pusta
+	 */
 	public int pop() {
 		if (isEmpty())
 			return -1;
@@ -37,14 +58,23 @@ public class IntLinkedList {
 		return ret;
 	}
 
+	/**
+	 * @return zwraca ostatni węzeł listy
+	 */
 	public Node getLast() {
 		return last;
 	}
 
+	/**
+	 * @param last
+	 */
 	public void setLast(Node last) {
 		this.last = last;
 	}
 
+	/**
+	 * @return pozycja iteratora
+	 */
 	public int getI() {
 		return i;
 	}
