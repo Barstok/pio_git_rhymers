@@ -17,6 +17,7 @@ public class DefaultCountingOutRhymer {
             numbers[++total] = in;
     }
 
+    // TODO: nazwa funkcji nie przedstawia jasno jej dzialania, moglo by byc np. isEmpty
     public boolean callCheck() {
         return total == -1;
     }
@@ -25,6 +26,7 @@ public class DefaultCountingOutRhymer {
         return total == 11;
     }
 
+    // TODO: nazwa tej funkcji moglaby miec nazwe sugerujaca jej dzialanie np. getTop albo getLast
     protected int peekaboo() {
         if (callCheck())
             return -1;

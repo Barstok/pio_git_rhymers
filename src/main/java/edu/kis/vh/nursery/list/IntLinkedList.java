@@ -8,7 +8,8 @@ public class IntLinkedList {
 		private int value;
 		protected Node prev;
 		protected Node next;
-	
+		
+		// TODO: Parametr 'i' moglby miec bardziej znaczaca nazwe
 		public Node(int i) {
 			value = i;
 		}
