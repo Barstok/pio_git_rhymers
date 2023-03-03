@@ -1,17 +1,24 @@
 package edu.kis.vh.nursery;
 
-public class HanoiRhymer extends defaultCountingOutRhymer {
+// Złe były wiersze zawierające pole totalRejected oraz instrukcje warunkowe w metodzie countIn
 
-int totalRejected = 0;
+public class HanoiRhymer extends DefaultCountingOutRhymer {
 
-	public int reportRejected() {
-		return totalRejected;
-	}
+    public static final int BEGIN_REJECTED = 0;
+    private int totalRejected = BEGIN_REJECTED;
 
-	public void countIn(int in) {
-	if (!callCheck() && in > peekaboo())
-			totalRejected++;
-			else
-				super.countIn(in);
-	}
+    public int reportRejected() {
+        return totalRejected;
+    }
+
+    @Override
+    public void countIn(int in) {
+        if (!callCheck() && in > peekaboo())
+            totalRejected++;
+        else
+            super.countIn(in);
+    }
 }
+
+
+// Kombinacja ALT + strzałka zmienia widok na nastepny lub poprzedni plik

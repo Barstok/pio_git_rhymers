@@ -1,78 +1,157 @@
 package edu.kis.vh.nursery;
 
+import edu.kis.vh.nursery.factory.DefaultRhymersFactory;
+import edu.kis.vh.nursery.factory.RhymersFactory;
+import edu.kis.vh.nursery.list.IntLinkedList;
+
 import org.junit.Assert;
 import org.junit.Test;
 
 public class RhymersJUnitTest {
+	
+	//test przeszły pomyślnie
 
-	@Test
-	public void testCountIn() {
-		defaultCountingOutRhymer rhymer = new defaultCountingOutRhymer();
-		int testValue = 4;
-		rhymer.countIn(testValue);
+    public static final int TEST_VALUE = 4;
+    public static final int COUNTINS = 888;
 
-		int result = rhymer.peekaboo();
-		Assert.assertEquals(testValue, result);
-	}
+    @Test
+    public void testDefaultRhymersFactory() {
+        RhymersFactory rhymersFactory = new DefaultRhymersFactory();
 
-	@Test
-	public void testCallCheck() {
-		defaultCountingOutRhymer rhymer = new defaultCountingOutRhymer();
-		boolean result = rhymer.callCheck();
-		Assert.assertEquals(true, result);
+        Assert.assertNotNull(rhymersFactory.getStandardRhymer());
+        Assert.assertNotNull(rhymersFactory.getFalseRhymer());
+        Assert.assertNotNull(rhymersFactory.getFIFORhymer());
+        Assert.assertNotNull(rhymersFactory.getHanoiRhymer());
+    }
 
-		rhymer.countIn(888);
+    @Test
+    public void testLLisEmpty(){
+        IntLinkedList linkedList = new IntLinkedList();
+        
+        Assert.assertTrue(linkedList.isEmpty());
+    }
 
-		result = rhymer.callCheck();
-		Assert.assertEquals(false, result);
-	}
+    @Test
+    public void testLLisFull(){
+        IntLinkedList linkedList = new IntLinkedList();
 
-	@Test
-	public void testIsFull() {
-		defaultCountingOutRhymer rhymer = new defaultCountingOutRhymer();
-		final int STACK_CAPACITY = 12;
-		for (int i = 0; i < STACK_CAPACITY; i++) {
-			boolean result = rhymer.isFull();
-			Assert.assertEquals(false, result);
-			rhymer.countIn(888);
-		}
+        Assert.assertFalse(linkedList.isFull());
+    }
 
-		boolean result = rhymer.isFull();
-		Assert.assertEquals(true, result);
-	}
+    @Test
+    public void testLLpush(){
+        IntLinkedList linkedList = new IntLinkedList();
+        linkedList.push(TEST_VALUE);
 
-	@Test
-	public void testPeekaboo() {
-		defaultCountingOutRhymer rhymer = new defaultCountingOutRhymer();
-		final int EMPTY_STACK_VALUE = -1;
+        Assert.assertFalse(linkedList.isEmpty());
+    }
 
-		int result = rhymer.peekaboo();
-		Assert.assertEquals(EMPTY_STACK_VALUE, result);
+    @Test
+    public void testLLpop(){
+        IntLinkedList linkedList = new IntLinkedList();
+        linkedList.push(TEST_VALUE);
 
-		int testValue = 4;
-		rhymer.countIn(testValue);
+        Assert.assertEquals(TEST_VALUE,linkedList.pop());
+        Assert.assertTrue(linkedList.isEmpty());
+    }
 
-		result = rhymer.peekaboo();
-		Assert.assertEquals(testValue, result);
-		result = rhymer.peekaboo();
-		Assert.assertEquals(testValue, result);
-	}
+    @Test
+    public void testLLtop(){
+        IntLinkedList linkedList = new IntLinkedList();
 
-	@Test
-	public void testCountOut() {
-		defaultCountingOutRhymer rhymer = new defaultCountingOutRhymer();
-		final int EMPTY_STACK_VALUE = -1;
+        linkedList.push(TEST_VALUE);
+        
+        Assert.assertEquals(TEST_VALUE,linkedList.top());
+    }
 
-		int result = rhymer.countOut();
-		Assert.assertEquals(EMPTY_STACK_VALUE, result);
+    @Test
+    public void testCountIn() {
+        DefaultCountingOutRhymer rhymer = new DefaultCountingOutRhymer();
+        rhymer.countIn(TEST_VALUE);
 
-		int testValue = 4;
-		rhymer.countIn(testValue);
+        int result = rhymer.peekaboo();
+        Assert.assertEquals(TEST_VALUE, result);
+    }
 
-		result = rhymer.countOut();
-		Assert.assertEquals(testValue, result);
-		result = rhymer.countOut();
-		Assert.assertEquals(EMPTY_STACK_VALUE, result);
-	}
+    @Test
+    public void testCallCheck() {
+        DefaultCountingOutRhymer rhymer = new DefaultCountingOutRhymer();
+        boolean result = rhymer.callCheck();
+        Assert.assertTrue(result);
+
+        rhymer.countIn(COUNTINS);
+
+        result = rhymer.callCheck();
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void testIsFull() {
+        DefaultCountingOutRhymer rhymer = new DefaultCountingOutRhymer();
+        final int STACK_CAPACITY = 12;
+        for (int i = 0; i < STACK_CAPACITY; i++) {
+            boolean result = rhymer.isFull();
+            Assert.assertFalse(result);
+            rhymer.countIn(COUNTINS);
+        }
+
+        boolean result = rhymer.isFull();
+        Assert.assertTrue(result);
+    }
+
+    @Test
+    public void testPeekaboo() {
+        DefaultCountingOutRhymer rhymer = new DefaultCountingOutRhymer();
+        final int EMPTY_STACK_VALUE = -1;
+
+        int result = rhymer.peekaboo();
+        Assert.assertEquals(EMPTY_STACK_VALUE, result);
+
+        rhymer.countIn(TEST_VALUE);
+
+        result = rhymer.peekaboo();
+        Assert.assertEquals(TEST_VALUE, result);
+        result = rhymer.peekaboo();
+        Assert.assertEquals(TEST_VALUE, result);
+    }
+
+    @Test
+    public void testCountOut() {
+        DefaultCountingOutRhymer rhymer = new DefaultCountingOutRhymer();
+        final int EMPTY_STACK_VALUE = -1;
+
+        int result = rhymer.countOut();
+        Assert.assertEquals(EMPTY_STACK_VALUE, result);
+
+        rhymer.countIn(TEST_VALUE);
+
+        result = rhymer.countOut();
+        Assert.assertEquals(TEST_VALUE, result);
+        result = rhymer.countOut();
+        Assert.assertEquals(EMPTY_STACK_VALUE, result);
+    }
+
+    @Test
+    public void testFIFORhymer() {
+        FIFORhymer rhymer = new FIFORhymer();
+
+        rhymer.countIn(1);
+        rhymer.countIn(2);
+        rhymer.countIn(3);
+
+        Assert.assertEquals(rhymer.countOut(), 1);
+        Assert.assertEquals(rhymer.countOut(), 2);
+        Assert.assertEquals(rhymer.countOut(), 3);
+
+        Assert.assertTrue(rhymer.callCheck());
+    }
+
+    @Test
+    public void testHanoiRhymer() {
+        HanoiRhymer rhymer = new HanoiRhymer();
+
+        rhymer.countIn(TEST_VALUE);
+        Assert.assertEquals(TEST_VALUE, rhymer.peekaboo());
+    }
 
 }
